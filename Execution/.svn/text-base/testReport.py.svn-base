@@ -1,0 +1,30 @@
+'''
+Created on 2013-1-28
+
+@author: wally
+'''
+from selenium import webdriver
+
+from FrameworkSupport.Common import *
+import FrameworkSupport.Reporting as Rp
+
+if __name__ == '__main__':
+    
+    URL = "https://cad360.autodeskplm.com/fusion/client.html?/login#log"
+    
+    global reportObj
+    reportObj = Rp.Reporting()
+    reportObj.initReport('Test Case')
+    
+    driver = webdriver.Firefox()
+    driver.get(URL)
+    
+    reportObj.reporting(driver, 'test Data1', 'Login', 'should Login', 'not login', 'pass')
+    reportObj.reporting(driver, 'test Data1', 'Delete Project By Name', 'should Login', 'not login', 'pass')
+    reportObj.reporting(driver, 'test Data1', 'Delete Project By Name', 'should Login', 'not login', 'fail')
+    reportObj.reporting(driver, 'test Data1', 'Dragdrop Files', 'should Login', 'not login', 'fail')
+    reportObj.reporting(driver, 'test Data1', 'Verify Details', 'should Login', 'not login', 'pass')
+    
+    reportObj.endReport()
+
+    

@@ -1,0 +1,114 @@
+'''
+Created on Dec 20, 2012
+
+@author: wally.yu@autodesk.com
+'''
+import sys
+sys.path.append('..')
+
+from django.core.management import setup_environ
+import settings
+setup_environ(settings)
+
+import os
+import datetime
+import Common
+import FrameworkSupport
+from FrameworkSupport.Reports.models import *
+
+class Reporting:
+    def __init__(self):
+        import platform
+        if platform.system() == 'Windows':
+            self.reportPath = 'c:\report.txt'
+        else:
+            self.reportPath = '/tmp/report.txt'
+        self.reportID = 0
+        self.tcID = 0
+
+    def initReport(self, tcName):
+        
+        settings.steps = ''
+        
+        if settings.taskID == 0:
+            # Create a record for Task
+            newTask = Task(status = 0,
+                           passed = 0,
+                           failed = 0,
+                           executionDuration = '0 sec'
+                           )
+            newTask.save()
+            self.reportID = newTask.id
+            settings.taskID = newTask.id
+        else:
+            newTask = Task.objects.get(id=settings.taskID)
+        
+        # Create a record for Test Case
+        newTC = TestCase(task = newTask,
+                         testCaseName = tcName,
+                         passed = 0,
+                         failed = 0,
+                         startTime = datetime.datetime.now(),
+                         endTime = datetime.datetime.now(),
+                         status = 0,
+                         )
+        newTC.save()
+        self.tcID = newTC.id
+        
+        Common.prt(1, '%s Test Start on %s' % (tcName, str(datetime.datetime.now())))
+        print 'Report Path: http://%s/automationResult/?id=%d' % (settings.reportHost,newTask.id)
+        
+    def reporting(self, driver, tdName, actionName, expected, actual, result):
+        tcObj = TestCase.objects.get(id = self.tcID)
+        tcObj.status = 1
+        tcObj.endTime = datetime.datetime.now()
+        tcObj.save()
+        
+        Common.prt(3, ' -- ' + actual + ' <=='+result)
+        try:
+            tdObj = TestData.objects.get(testCase = tcObj, name = tdName)
+            tdObj.endTime = datetime.datetime.now()
+            tdObj.save()
+        except:
+            newTestData = TestData(testCase = tcObj,
+                                   name = tdName,
+                                   passed = 0,
+                                   failed = 0,
+                                   startTime = datetime.datetime.now(),
+                                   endTime = datetime.datetime.now(),
+                                   )
+            newTestData.save()
+            tdObj = newTestData
+
+        try: 
+            actionObj = Action.objects.get(testData = tdObj, name = actionName)
+        except:
+            newAction = Action(testData = tdObj,
+                               name = actionName,
+                               passed = 0,
+                               failed = 0,
+                               )
+            newAction.save()
+            actionObj = newAction
+        
+        newChkPt = Checkpoint(action = actionObj,
+                              expected = expected,
+                              actual = actual,
+                              result = result,
+                              steps = settings.steps)
+        newChkPt.save()
+        
+        if result.upper() != 'PASS':
+            screenShotStr = driver.get_screenshot_as_base64()
+            newScreenshot = Screenshot(checkpoint = newChkPt,
+                                       screenshot = screenShotStr
+                                       )
+            newScreenshot.save()
+        
+    def endReport(self):
+        objTC = TestCase.objects.get(id = self.tcID)
+        objTC.endTime = datetime.datetime.now()
+        objTC.status = 2
+        objTC.save()
+        Common.prt(1, 'Test Finished on %s' % str(datetime.datetime.now()))
+        print 'Test Finished, Report Path: http://%s/automationResult/?id=%d' % (settings.reportHost,self.reportID)

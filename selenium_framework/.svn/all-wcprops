@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/CPAutomation/!svn/ver/41/trunk/FrameworkSupport
+END
+WebBrowser.py
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/CPAutomation/!svn/ver/21/trunk/FrameworkSupport/WebBrowser.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/CPAutomation/!svn/ver/2/trunk/FrameworkSupport/__init__.py
+END
+Reporting.py
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/CPAutomation/!svn/ver/40/trunk/FrameworkSupport/Reporting.py
+END
+Common.py
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/CPAutomation/!svn/ver/41/trunk/FrameworkSupport/Common.py
+END
+WebElement.py
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/CPAutomation/!svn/ver/41/trunk/FrameworkSupport/WebElement.py
+END

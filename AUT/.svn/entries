@@ -1,0 +1,71 @@
+10
+
+dir
+42
+https://shacng109wqnm.ads.autodesk.com/svn/CPAutomation/trunk/AUT
+https://shacng109wqnm.ads.autodesk.com/svn/CPAutomation
+
+
+
+2013-02-06T04:19:45.498403Z
+41
+yuwa
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+11d56faf-4ab6-594e-b762-20bfba8b348a
+
+Dashboard
+dir
+
+Grapevine
+dir
+
+Jira4Portal
+dir
+
+__init__.py
+file
+
+
+
+
+2013-02-16T04:57:10.000000Z
+d41d8cd98f00b204e9800998ecf8427e
+2013-01-04T01:35:33.659882Z
+2
+yuwa
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+0
+

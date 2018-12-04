@@ -1,0 +1,23 @@
+'''
+Created on 2012-12-28
+
+@author: wally
+'''
+from selenium import webdriver
+import sys
+sys.path.append('..')
+from AUT.Dashboard.Pages import *
+from AUT.Dashboard.TestCases.Regression import *
+from FrameworkSupport.Common import *
+import time, settings
+
+if __name__ == '__main__':
+    URL = "https://cad360.autodeskplm.com/fusion/client.html?/login#log"
+    prt(0, 'Testing Starts on %s' %(str(getFormatedCurrentTime())))
+    
+    # Firefox Driver
+    driver = webdriver.Firefox()
+    _testData = {'login':['cad360', 'plm360demo', 'plm360demo']
+                 }
+    reg_ProjectSortingTest(driver, URL, _testData)
+    

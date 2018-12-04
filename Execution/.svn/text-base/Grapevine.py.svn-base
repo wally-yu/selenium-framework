@@ -1,0 +1,30 @@
+'''
+Created on 2012-12-26
+
+@author: wally
+'''
+from selenium import webdriver
+import sys
+sys.path.append('..')
+from AUT.Grapevine.Pages import loginPage, landingPage
+from AUT.Grapevine.TestCases import loginTest
+from FrameworkSupport.Common import prt, getFormatedCurrentTime
+import time, settings
+
+if __name__ == '__main__':
+    prt(0, 'Testing Starts on %s' %(str(getFormatedCurrentTime())))
+    
+    browser = webdriver.Firefox()
+    browser.get("http://grapevine.autodesk.com")
+    time.sleep(settings.tMini)
+    loginTest(browser)
+
+    browser.quit()
+ 
+##    prt(0,"Testing Finished on %s" %(str(getFormatedCurrentTime())))
+#    browser.get_screenshot_as_file(filename)
+#    print browser.find_element_by_id("signin_page_credentials-password").__subclasshook__()
+##    print browser.find_element_by_id("signin_page_credentials-password").is_enabled()
+##    print browser.find_element_by_id("signin_page_credentials-password").is_displayed()
+##    prt(0,"Testing Finished on %s" %(str(getFormatedCurrentTime())))
+

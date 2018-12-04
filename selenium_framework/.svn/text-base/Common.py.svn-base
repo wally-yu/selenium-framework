@@ -1,0 +1,174 @@
+'''
+Created on Dec 20, 2012
+
+@author: wally.yu@autodesk.com
+'''
+
+import os
+import settings
+
+def deleteFile(fileLocation):
+    if os.path.exists(fileLocation):
+        os.remove(fileLocation)
+
+def getCurrentFolder():
+    return os.getcwd()
+
+def getCurrentFileAbsLoc():
+    return os.path.abspath('.')
+
+def createFolder(folderPath):
+    os.mkdir(folderPath)
+
+def createFile(fileLocation):
+    f = file(fileLocation, 'w')
+    f.close()
+
+def fileExist(fileLocation):
+    return os.path.exists (fileLocation)
+
+def getFormatedCurrentTime():
+    import time
+    return time.strftime('%Y-%m-%d_%H:%M:%S',time.localtime(time.time()))
+
+def fileWriteAppend (fileLocation, txt):
+    file_handler = open(fileLocation, 'a+')
+    file_handler.write (txt + '\n')
+    file_handler.close()
+
+def fileWriteChange (fileLocation, txt):
+    file_handler = open(fileLocation, 'w+')
+    file_handler.write (txt + '\n')
+    file_handler.close()
+
+def fileWriteLinesChange (fileLocation, txt):
+    file_handler = open(fileLocation, 'w+')
+    file_handler.writelines(txt)
+    file_handler.close()
+    
+def fileReadAll (fileLocation):
+    try:
+        file_handler = open(fileLocation, 'r')
+        return file_handler.readlines ()
+        file_handler.close()
+    except:
+        li = []
+        return li
+
+def fileLineCount (fileLocation):
+    file_handler = open(fileLocation, 'r')
+    ret = file_handler.readlines()
+    return len(ret)
+    file_handler.close()
+
+def fileReadLastLine (fileLocation):
+    file_handler = open(fileLocation, 'r')
+    ret = file_handler.readlines()
+    return ret[-1]
+    file_handler.close()
+
+def fileReadLastLines (fileLocation, lineNumbers):
+    file_handler = open(fileLocation, 'r')
+    ret = file_handler.readlines()
+    return ret[lineNumbers*(-1):]
+    file_handler.close()
+
+def fileReadline (fileLocation, lineNumbers):
+    file_handler = open(fileLocation, 'r')
+    ret = file_handler.readlines()
+    return ret[lineNumbers-1]
+    file_handler.close()
+
+def fileReadLines (fileLocation, lineStart, lineEnd):
+    file_handler = open(fileLocation, 'r')
+    ret = file_handler.readlines()
+    return ret[(lineStart-1):lineEnd]
+    file_handler.close()
+    
+def prt(offset, value, newLine = False):
+    if newLine == True:
+        print '\r'
+    ret = ''
+    for i in range(offset*4):
+        ret = ret + ' '
+    settings.steps = (ret + value) if (settings.steps == '') else (settings.steps + '<br>\n' + ret + value)
+    print ret + value
+
+
+def formatedStrNumber(number):
+    if str(number)[-1] == '1':
+        return str(number) + 'st'
+    elif str(number)[-1] == '2':
+        return str(number) + 'nd'
+    elif str(number)[-1] == '3':
+        return str(number) + 'rd'
+    else:
+        return str(number) + 'th'
+    
+def getOSType():
+    import platform
+    if platform.system() == 'Windows':
+        return 'Windows'
+    elif platform.system() == 'Linux':
+        return 'Linux'
+    else:
+        return 'Mac'
+
+def openFolder(folderPath):
+    import platform
+
+    if platform.system() == 'Windows':
+        os.startfile(folderPath)
+    elif platform.system() == 'Linux':
+        os.system('xdg-open "%s"' % folderPath)
+    else: #Mac
+        os.system('open "%s"' % folderPath)
+#def openFolder(folderPath):
+#    if getOSType == 'Mac':
+#        print "open %s" % folderPath
+#        os.system('open "%s"' % folderPath)
+#    elif getOSType == 'Windows':
+#        os.startfile(folderPath)
+#    elif getOSType == 'Linux':
+#        os.system('xdg-open "%s"' % folderPath)
+        
+def executeSikuliScript(scriptPath):
+    import platform
+    if platform.system() == 'Windows':
+        pass
+    else:
+        os.system('open %s' % scriptPath)
+        
+def delSpecialItem(li):
+    ret = []
+    for elem in li:
+        continueFlag = True
+        for i in range(len(elem)):
+            if 48<=ord(elem[i])<=57 or 65<=ord(elem[i])<=90 or 97<=ord(elem[i])<=122:
+                pass
+            else:
+                continueFlag = False
+                break
+        if continueFlag == True:
+            ret.append(elem.lower())
+    return ret
+
+def getFirstDayFromWeekNumber(year,weekNumber):
+    import datetime
+    #currentYear = datetime.date.today().year
+    vDay = datetime.date(year,1,1)
+    weekday = vDay.weekday()
+    firstDayOfYear = vDay - datetime.timedelta(weekday)
+    return firstDayOfYear + datetime.timedelta(7*weekNumber - 7)
+
+def getWeekNumberFromToday():
+    import datetime
+    today = datetime.date.today()
+    vDay = datetime.date(today.year, 1,1)
+    weekday = vDay.weekday()
+    firstDayOfYear = vDay - datetime.timedelta(weekday)
+    days = today - firstDayOfYear
+    weeks = int(str(days.days)) / 7
+    if int(str(days.days)) % 7 > 0:
+        weeks = weeks +1
+    return weeks
