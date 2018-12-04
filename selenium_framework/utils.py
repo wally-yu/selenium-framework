@@ -82,7 +82,11 @@ def close_browser(driver):
     driver.quit()
 
     # Remove specific tmp dir of this "run"
-    shutil.rmtree(_tmp_folder)
+    try:
+        shutil.rmtree(_tmp_folder)
+    except:
+        # silent pass
+        pass
 
     # Remove possible core dumps
     folder = '/tmp'

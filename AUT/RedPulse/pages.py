@@ -4,15 +4,16 @@ Created on 2013-5-9
 @author: wally
 '''
 from selenium_framework import web_element
+from selenium_framework.web_element import identifier
 from selenium_framework.utils import BasePage
 
 
 class LoginPage(BasePage):
 
-    txt_user_name = web_element.WebEdit('xpath', "//input[@placeholder='Email']", 'email address')
-    txt_password = web_element.WebEdit('name', "password", 'password')
-    chk_remember_me = web_element.WebCheckbox('id', 'checkbox1', 'remember me')
-    btn_login = web_element.WebButton('xpath', "//button[@type='submit']", 'Login' )
+    txt_user_name = web_element.WebEdit(identifier.xpath, "//input[@placeholder='Email']", 'email address')
+    txt_password = web_element.WebEdit(identifier.name, "password", 'password')
+    chk_remember_me = web_element.WebCheckbox(identifier.id, 'checkbox1', 'remember me')
+    btn_login = web_element.WebButton(identifier.xpath, "//button[@type='submit']", 'Login' )
 
 
 class HomePage(BasePage):
