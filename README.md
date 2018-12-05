@@ -35,7 +35,12 @@ driver_binary_files
 ```
 ###### 3. Download binary files and put them there.
  - Example: Chrome driver can be downloaded from: http://chromedriver.chromium.org/downloads
- ###### 4. Start to build your awesome script!
+ ###### 4. Start to build your awesome project simply by:
+
+```
+import selenium_framework
+```
+
 
 ### Sample Code and Structures
 TBD later, but in the meantime, please refer to "AUT" folder
