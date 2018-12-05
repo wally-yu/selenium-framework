@@ -23,13 +23,13 @@ class BaseAction():
         prt(2, 'Current Action: %s' % self.__action_name, True)
 
 
-def start_browser(URL, browserType='chrome', brower_driver_location=settings.DRIVER_PATH_CHROME_MAC):
+def start_browser(URL, brower_driver_location=settings.DRIVER_PATH_CHROME, browserType='chrome', ):
     prt(0, 'Stated to Open Browser %s' % browserType.upper())
     if browserType.upper() == 'FIREFOX':
         driver = webdriver.Firefox()
     elif browserType.upper() == 'CHROME':
         chrome_options = webdriver.ChromeOptions()
-        chrome_options.binary_location = settings.DRIVER_PATH_CHROME
+        chrome_options.binary_location = brower_driver_location
 
         if not os.path.exists(_tmp_folder):
             os.makedirs(_tmp_folder)
@@ -44,8 +44,7 @@ def start_browser(URL, browserType='chrome', brower_driver_location=settings.DRI
             os.makedirs(_tmp_folder + '/cache-dir')
 
         if 'Darwin' in platform():
-            chrome_driver_location = settings.DRIVER_PATH_CHROME_MAC
-            driver = webdriver.Chrome(chrome_driver_location)
+            driver = webdriver.Chrome(brower_driver_location)
         elif 'Linux' in platform():
             # Designed for headless like aws lambda
             chrome_options.add_argument('--headless')

@@ -1,7 +1,9 @@
 SeleniumFramework
 =================
 
-Well, when i looked into my previous codes, I found 6 years back (2013) when I just joined Autodesk, I wrote a Selenium Framework which was used by several teams within Autodesk.
+### Backgrounds
+
+Well, when i looked into my previous codes, I found 6 years back (Dec.2012) when I just joined Autodesk, I wrote a Selenium Framework which was used by several teams within Autodesk.
 
 Now 6 years passed and I already left Autodesk, maybe it's time to share to Github, lol.
 
@@ -19,3 +21,21 @@ If I have time, i will work on the follwoing:
  - test headless
 
 Don't laugh at me if codes looks ugly for you, i wrote it 6 years ago, lol
+
+### Usage
+
+###### 1. Install this package:
+```
+pip install pyselenium-framework
+```
+###### 2. Create a folder under your application to store Chrome/Firefox binary files, let's say folder called:
+
+```
+driver_binary_files
+```
+###### 3. Download binary files and put them there.
+ - Example: Chrome driver can be downloaded from: http://chromedriver.chromium.org/downloads
+ ###### 4. Start to build your awesome script!
+
+### Sample Code and Structures
+TBD later, but in the meantime, please refer to "AUT" folder

@@ -19,10 +19,6 @@ DRIVER_PATH_CHROME = os.path.join(os.getcwd(),
                                   'selenium_framework',
                                   'driver_binary_files',
                                   'chromedriver')
-DRIVER_PATH_CHROME_MAC = os.path.join(os.getcwd(),
-                                      'selenium_framework',
-                                      'driver_binary_files',
-                                      'chromedriver_mac')
 DRIVER_PATH_CHROME_HEADLESS = os.path.join(os.getcwd(),
                                            'selenium_framework',
                                            'driver_binary_files',
