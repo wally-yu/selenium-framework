@@ -7,7 +7,7 @@ Well, when i looked into my previous codes, I found 6 years back (Dec.2012) when
 
 Now 6 years passed and I already left Autodesk, maybe it's time to share to Github, lol.
 
-This framework provides a way to code Selenium Automation with Layers instead of wrting un-resuable and un-readable codes. 
+This framework provides a way to code Selenium Automation with Layers instead of writing un-resuable and un-readable codes. 
 Suggested layers are:
  - Pages: define elements and pages
  - Actions: define test actions using web elements defined in "pages"
@@ -43,4 +43,5 @@ import selenium_framework
 
 
 ### Sample Code and Structures
-TBD later, but in the meantime, please refer to "AUT" folder
+TBD later, but in the meantime, please refer to:
+https://github.com/wally-yu/selenium-framework/tree/master/AUT/RedPulse
